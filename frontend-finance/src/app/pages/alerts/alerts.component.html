@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary text-center">
+    <i class="bi bi-bell-fill me-2"></i> Alertes en Temps Réel
+  </h2>
+
+  <div class="row">
+    <div
+      class="col-md-6 mb-3"
+      *ngFor="let alert of alerts"
+    >
+      <div
+        class="card shadow-sm border-start border-5"
+        [ngClass]="{
+          'border-danger': alert.variation < -10,
+          'border-warning': alert.variation >= -10 && alert.variation < 0
+        }"
+      >
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="bi bi-currency-bitcoin text-warning me-2"></i>
+            {{ alert.asset }}
+          </h5>
+          <p class="card-text">
+            <strong>Variation:</strong>
+            <span
+              [ngClass]="{
+                'text-danger': alert.variation < 0,
+                'text-success': alert.variation >= 0
+              }"
+            >
+              {{ alert.variation }}%
+            </span>
+            <br />
+            <strong>Heure:</strong>
+            {{ alert.timestamp | date: 'shortTime' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
